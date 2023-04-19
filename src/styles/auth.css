@@ -1,0 +1,97 @@
+.login-wrapper {
+    background: #ffe8d0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px 30px;
+    box-shadow: 0px 30px 20px rgba(0,0,0,.1);
+    max-width: 400px;
+    width: 100%;
+}
+.login-box h2 {
+    margin: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 20px;
+}
+.login-box label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.login-box .input-box{
+    width: 100%;
+    height: 40px;
+    border: none;
+    background: #efefef;
+    border-radius: 7px;
+    padding: 0 20px;
+}
+.login-box .btn{
+    width: 100%;
+}
+.signup-wrapper{
+    flex-direction: column;
+    height: unset;
+    padding: 50px 0;
+}
+.signup-steps ul {display: flex;justify-content: space-between;}
+
+.signup-steps {
+    width: 400px;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.signup-steps ul li p {
+    margin: 0 0 4px;
+    font-weight: 500;
+}
+
+.signup-steps ul li {
+    text-align: center;
+}
+
+.signup-steps ul li span {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    background: #fff;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.signup-steps ul li.active span {
+    background: #ff8200;
+    color: #fff;
+}
+.signup-steps h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.signup-wrapper .login-box {
+    max-width: 600px;
+}
+.sigup-gender .form-input {
+    display: inline-flex;
+    margin-right: 10px;
+}
+.form-input input[type="radio"],.form-input input[type="checkbox"] {
+    margin: 0 5px 0 0;
+}
+.signup-wrapper .login-box .btn {
+    width: unset;
+}
+.signup_link{
+    margin-top: 20px;
+    text-align: center;
+}

@@ -9,7 +9,10 @@ function Input(props) {
           className={props.className}
           name={props.name}
           value={props.value}
-          onChange={props.onChange}/>
+          onChange={props.onChange}
+          id={props.id}
+          checked={props.checked}/>
+          {props.children}
         <p>{props.error}</p>
       </div>
     </>

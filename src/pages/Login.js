@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import notification from "../notifications";
 import Input from "../components/Input";
+import Button from "../components/Button";
+import '../styles/auth.css'
 
 function Login(){
   const [loginData,setLoginData] = useState({
@@ -11,6 +13,8 @@ function Login(){
   const [emailErr,setEmailErr] = useState('')
   const [passwordErr,setPasswordErr] = useState('')
   const [success,setSuccess] = useState('')
+
+  const isLoggedIn = localStorage.getItem('loginData');
 
   const navigate = useNavigate();
 
@@ -22,7 +26,7 @@ function Login(){
     })
   }
 
-  const handleSubmit =(e)=>{
+  const loginSubmit =(e)=>{
     e.preventDefault()
     console.log(loginData);
 
@@ -43,24 +47,33 @@ function Login(){
     }
 
     if(loginData.email.includes('rahul@gmail.com') && loginData.password.includes('rahul123')){
+      localStorage.setItem('loginData',JSON.stringify({
+        email:'rahul@gmail.com',
+        password:'rahul123'
+      }));
       setSuccess(notification.loginSuccess)
-      setTimeout(()=>{
-          navigate('/dashboard');
-      },1500)
+      navigate('/dashboard');
     }
   }
 
+  useEffect(() => {
+    if(isLoggedIn){
+      navigate('/dashboard');
+    }
+  }, []);
+
   return(
     <>
+      {!isLoggedIn ? 
       <div className="login-wrapper">
         <div className="login-box">
           <h2>Login Form</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={loginSubmit}>
             <Input 
               label="Email"
               type="email"
               placeholder="Enter email"
-              className={`animate__animated ${!emailErr ? null : 'animate__headShake'}`}
+              className={`input-box animate__animated ${!emailErr ? null : 'animate__headShake'}`}
               name="email"
               value={loginData.email}
               onChange={handleInput}
@@ -70,17 +83,21 @@ function Login(){
               label="Password"
               type="password"
               placeholder="Enter password"
-              className={`animate__animated ${!passwordErr ? null : 'animate__headShake'}`}
+              className={`input-box animate__animated ${!passwordErr ? null : 'animate__headShake'}`}
               name="password"
               value={loginData.password}
               onChange={handleInput}
               error={passwordErr}/>
 
-            <button type="submit" className="btn">Login</button>
+            <Button type="submit" className="btn">Login</Button>
+
+            <div className="signup_link"><a href="/signup">Create new account.</a></div>
+
             {success ? <p className="success animate__animated animate__bounceInRight">{success}</p>: null}
           </form>
         </div>
       </div>
+      :null}
     </>
   )
 }
