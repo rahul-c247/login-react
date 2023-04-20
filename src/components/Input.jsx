@@ -13,7 +13,7 @@ function Input(props) {
           id={props.id}
           checked={props.checked}/>
           {props.children}
-        <p>{props.error}</p>
+          {props.error ? <p className="error">{props.error}</p> : null}
       </div>
     </>
   )

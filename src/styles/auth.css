@@ -39,44 +39,9 @@
 }
 .signup-wrapper{
     flex-direction: column;
-    height: unset;
+    overflow-x: hidden;
+    justify-content: flex-start;
     padding: 50px 0;
-}
-.signup-steps ul {display: flex;justify-content: space-between;}
-
-.signup-steps {
-    width: 400px;
-    max-width: 100%;
-    margin-bottom: 20px;
-}
-
-.signup-steps ul li p {
-    margin: 0 0 4px;
-    font-weight: 500;
-}
-
-.signup-steps ul li {
-    text-align: center;
-}
-
-.signup-steps ul li span {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    background: #fff;
-    border-radius: 100px;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-}
-
-.signup-steps ul li.active span {
-    background: #ff8200;
-    color: #fff;
-}
-.signup-steps h2{
-    text-align: center;
-    margin-bottom: 20px;
 }
 .signup-wrapper .login-box {
     max-width: 600px;
@@ -94,4 +59,79 @@
 .signup_link{
     margin-top: 20px;
     text-align: center;
+}
+.sigup-gender .error {
+    margin-top: -15px;
+}
+
+.step-two {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.signup-steps ul li .line {
+    content: "";
+    height: 3px;
+    position: absolute;
+    left: -140px;
+    top: 46px;
+    background: #fff !important;
+    width: 140px;
+    z-index: -1;
+}
+
+.signup-steps ul li:first-child .line {
+    display: none;
+}
+
+.signup-steps ul li .line:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    background: var(--main-color);
+    transition: all 0.5s 0.1s;
+}
+.signup-steps ul li.active .line:before {
+    width: 100%;
+    transition: all 0.5s ;
+}
+.signup-steps ul {display: flex;justify-content: space-between;}
+
+.signup-steps {
+    width: 400px;
+    max-width: 100%;
+    margin-bottom: 40px;
+}
+.signup-steps ul li p {
+    margin: 0 0 4px;
+    font-weight: 500;
+}
+.signup-steps ul li {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.signup-steps ul li span {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    background: #fff;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+.signup-steps ul li.active span {
+    background: var(--main-color);
+    color: #fff;
+    transition: all 0.3s 0.5s;
+}
+.signup-steps h2{
+    text-align: center;
+    margin-bottom: 20px;
 }
