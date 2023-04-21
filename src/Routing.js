@@ -1,7 +1,7 @@
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import {Routes, Route} from 'react-router-dom';
-import Signup from './pages/Signup';
+import Signup from './pages/signup/Signup';
 
 function Routing(){
   return(

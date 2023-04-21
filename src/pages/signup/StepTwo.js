@@ -1,18 +1,29 @@
 import { useState } from "react"
-import Button from "../Button"
-import Column from "../common/Column"
-import Row from "../common/Row"
-import Pricing from "../Pricing"
+import Button from "../../components/Button"
+import Column from "../../components/common/Column"
+import Row from "../../components/common/Row"
+import Pricing from "../../components/Pricing"
 
 function StepTwo(props){
   const [plans,setPlans] = useState()
   const [isPlanSelected,setIsPlanSelected] = useState(false)
+
   const selectPlan=(id)=>{
     setPlans(id)
     setIsPlanSelected(true)
   }
+  
+  const goToThirdStep =()=>{
+    localStorage.setItem('pricingData', JSON.stringify({
+      price:plans == 0 ? '$49' : plans == 1 ? '$199' : '$149',
+      type:plans == 0 ? 'Monthly' : plans == 1 ? 'Yearly' : '6 Months',
+      freeTrial:plans == 0 ? '15 days' : plans == 1 ? '45 Days' : '30 Days',
+    }))
+    props.setStepThree(true)
+  }
+
   return(
-    <div className={`step-two ${props.visible ? 'animate__animated animate__slideInRight' : null}`}>
+    <div className={`step-two ${props.visible ? 'animate__animated animate__fadeInUp' : ''}`}>
       <div className="pricing-wrapper">
         <Row>
           <Column col="4">
@@ -49,7 +60,7 @@ function StepTwo(props){
       :null}
       <div className="pricing-btns">
         <Button type="button" onClick={props.backStep} className="btn black-btn">Back</Button>
-        {isPlanSelected ? <Button type="button" className="btn">Next step</Button>:null}
+        {isPlanSelected ? <Button type="button" className="btn" onClick={goToThirdStep}>Next step</Button>:null}
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import notification from "../notifications";
+import Notifications from "../utilities/Notifications";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import '../styles/auth.css'
@@ -31,17 +31,17 @@ function Login(){
     console.log(loginData);
 
     if(!loginData.email){
-      setEmailErr(notification.required);
+      setEmailErr(Notifications.required);
     }else if(!loginData.email.includes('rahul@gmail.com')){
-      setEmailErr(notification.invalidEmail);
+      setEmailErr(Notifications.invalidEmail);
     }else{
       setEmailErr('')
     }
 
     if(!loginData.password){
-      setPasswordErr(notification.required);
+      setPasswordErr(Notifications.required);
     }else if(!loginData.password.includes('rahul123')){
-      setPasswordErr(notification.invalidPassword);
+      setPasswordErr(Notifications.invalidPassword);
     }else{
       setPasswordErr('')
     }
@@ -51,7 +51,7 @@ function Login(){
         email:'rahul@gmail.com',
         password:'rahul123'
       }));
-      setSuccess(notification.loginSuccess)
+      setSuccess(Notifications.loginSuccess)
       navigate('/dashboard');
     }
   }

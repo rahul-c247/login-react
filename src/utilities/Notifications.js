@@ -1,4 +1,4 @@
-const notification = {
+const Notifications = {
   required : 'Please fill out this feild',
   invalidEmail : 'Invalid email',
   invalidPassword : 'Invalid password',
@@ -9,4 +9,4 @@ const notification = {
   specialCharErr: 'Password must contain at least one special character'
 }
 
-export default notification
+export default Notifications

@@ -3,6 +3,7 @@ import Container from "../components/common/Container"
 import Row from "../components/common/Row"
 import Column from "../components/common/Column"
 import Button from "../components/Button"
+import ShowData from "./signup/ShowData"
 
 function Dashboard(){
   const navigate = useNavigate()
@@ -17,20 +18,7 @@ function Dashboard(){
         <Button className="btn" onClick={handleLogout}>Logout</Button>
       </div> 
       <Container>
-        <Row>
-          <Column col="4">
-            container
-          </Column>
-          <Column col="4">
-            container
-          </Column>
-          <Column col="3">
-            container
-          </Column>
-          <Column col="3">
-            container
-          </Column>
-        </Row>
+      <ShowData></ShowData>
       </Container>
     </>
   )

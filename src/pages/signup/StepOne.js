@@ -1,13 +1,12 @@
-import Input from "../components/Input"
-import Row from "../components/common/Row"
-import Column from "../components/common/Column"
-import Button from "../components/Button"
-import notification from "../notifications"
-import StepTwo from "../components/signup/StepTwo"
-import '../styles/auth.css'
+import Input from "../../components/Input"
+import Row from "../../components/common/Row"
+import Column from "../../components/common/Column"
+import Button from "../../components/Button"
+import Notifications from "../../utilities/Notifications";
+import Validators from "../../utilities/Validators"
 import { useState } from "react"
 
-function Signup(){
+function StepOne(props){
   const [signupData, setSignupData] = useState({
     firstName: '',
     lastName: '',
@@ -25,8 +24,6 @@ function Signup(){
   const [emailErr,setEmailErr] = useState('')
   const [passwordErr,setPasswordErr] = useState('')
 
-  const [stepTwo, setStepTwo] = useState(false)
-
   const handleInput =(e)=>{
     const {name , value} = e.target
     setSignupData({
@@ -38,94 +35,50 @@ function Signup(){
   const signupSubmit =(e)=>{
     e.preventDefault()
     console.log(signupData);
-    
-    /* Object.values(signupData).forEach((key) =>{
-      if(!signupData[key]){
-        return setError(notification.required)
-      }else{
-        return setError('')
-      }
-    }) */
-
-    {!signupData.firstName ? setFnameErr(notification.required) : setFnameErr('')}
-    {!signupData.lastName ? setLnameErr(notification.required) : setLnameErr('')}
-    {!signupData.dob ? setDobErr(notification.required) : setDobErr('')}
-    {!signupData.gender ? setGenderErr(notification.required) : setGenderErr('')}
+    {!signupData.firstName ? setFnameErr(Notifications.required) : setFnameErr('')}
+    {!signupData.lastName ? setLnameErr(Notifications.required) : setLnameErr('')}
+    {!signupData.dob ? setDobErr(Notifications.required) : setDobErr('')}
+    {!signupData.gender ? setGenderErr(Notifications.required) : setGenderErr('')}
 
     if(!signupData.email){
-      setEmailErr(notification.required)
+      setEmailErr(Notifications.required)
     }else if(!signupData.email.includes('@')){
-      setEmailErr(notification.invalidEmail)
+      setEmailErr(Notifications.invalidEmail)
     }else{
       setEmailErr('')
     }
 
-    const capitalLetter = /^(?=.*[a-z])(?=.*[A-Z])/.test(signupData.password)
-    const oneNumber = /^(?=.*[0-9])/.test(signupData.password)
-    const oneSpecialChar = /^(?=.*[!@#\$%\^&\*])/.test(signupData.password)
-    const passLength = /^(?=.{8,})/.test(signupData.password)
-
     if(!signupData.password){
-      setPasswordErr(notification.required)
-    }else if(!passLength){
-      setPasswordErr(notification.passLengthErr)
-    }else if(!capitalLetter){
-      setPasswordErr(notification.capitalLetterErr)
-    }else if(!oneNumber){
-      setPasswordErr(notification.passNumberErr)
-    }else if(!oneSpecialChar){
-      setPasswordErr(notification.specialCharErr)
+      setPasswordErr(Notifications.required)
+    }else if(!Validators.passLength.test(signupData.password)){
+      setPasswordErr(Notifications.passLengthErr)
+    }else if(!Validators.capitalLetter.test(signupData.password)){
+      setPasswordErr(Notifications.capitalLetterErr)
+    }else if(!Validators.oneNumber.test(signupData.password)){
+      setPasswordErr(Notifications.passNumberErr)
+    }else if(!Validators.oneSpecialChar.test(signupData.password)){
+      setPasswordErr(Notifications.specialCharErr)
     }else{
       setPasswordErr('')
     }
 
-    const passValidator = passLength && capitalLetter && oneNumber && oneSpecialChar
+    const passValidator = Validators.passLength.test(signupData.password) && Validators.capitalLetter.test(signupData.password) && Validators.oneNumber.test(signupData.password) && Validators.oneSpecialChar.test(signupData.password)
+
     const saveSignupData = (signupData.firstName && signupData.lastName && signupData.dob && signupData.email && signupData.password && passValidator)
     
     if(saveSignupData){
       localStorage.setItem('signupData', JSON.stringify(signupData))
       setTimeout(()=>{
-        setStepTwo(true)
-        /* setSignupData({
-          firstName: '',
-          lastName: '',
-          dob:'',
-          gender:'',
-          email:'',
-          password:'',
-          check:''
-        }) */
+        props.setStepTwo(true)
       },200)
     }
 
-    /* setStepTwo(true) */
+    /* props.setStepTwo(true) */
   }
-
   return(
-    <div className="login-wrapper signup-wrapper">
-      <div className="signup-steps">
-        <h2>Set Up Your Account</h2>
-        <ul>
-          <li className="active">
-            <span className="line"></span>
-            <p>Step</p>
-            <span>01</span>
-          </li>
-          <li className={`${stepTwo ? 'active' : ''}`}>
-            <span className="line"></span>
-            <p>Step</p>
-            <span>02</span>
-          </li>
-          <li>
-            <span className="line"></span>
-            <p>Step</p>
-            <span>03</span>
-          </li>
-        </ul>
-      </div>
-      {!stepTwo ?
-      <div className={`step-one ${stepTwo === true ? 'animate__animated animate__slideOutLeft' : null}`}>
+    <div className={`step-one animate__animated animate__fadeInUp`}>
       <div className="login-box">
+        <h2>Signup Form</h2>
         <form onSubmit={signupSubmit}>
           <Row>
             <Column col='6'>
@@ -228,14 +181,8 @@ function Signup(){
           </Row>
         </form>
       </div>
-      </div>
-      :null}
-
-      {stepTwo === true ? 
-        <StepTwo visible={stepTwo} backStep={()=> setStepTwo(false)}></StepTwo>
-      :null}
     </div>
   )
 }
 
-export default Signup
+export default StepOne
