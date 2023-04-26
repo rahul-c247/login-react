@@ -73,7 +73,7 @@ function StepOne(props){
       },200)
     }
 
-    /* props.setStepTwo(true) */
+    props.setStepTwo(true)
   }
   return(
     <div className={`step-one animate__animated animate__fadeInUp`}>

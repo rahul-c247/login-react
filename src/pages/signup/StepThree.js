@@ -28,6 +28,8 @@ function StepThree(props){
 
   const [dataModal,setDataModal] = useState(false)
 
+  const [finalData, setFinalData] = useState(false)
+
   const handleInput =(e)=>{
     const {name , value} = e.target
     setCardDetails({
@@ -49,10 +51,11 @@ function StepThree(props){
 
     if(saveCardData){
       localStorage.setItem('cardData',JSON.stringify(cardDetails))
-      /* setTimeout(()=>{
+      setTimeout(()=>{
         setDataModal(true)
-      }) */
-      navigate('/dashboard')
+      })
+      setFinalData(true)
+      /* navigate('/dashboard') */
     }
   }
   

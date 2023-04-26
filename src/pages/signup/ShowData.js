@@ -16,7 +16,7 @@ function ShowData(){
     const card = JSON.parse(localStorage.getItem('cardData'));
     setCardData(card);
 
-  }, [cardData]);
+  }, []);
 
 
   console.log('rahul',pricingData);

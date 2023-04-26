@@ -4,6 +4,8 @@ import Notifications from "../utilities/Notifications";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import '../styles/auth.css'
+import jwtDecode from "jwt-decode";
+/* import 'https://apis.google.com/js/platform.js' */
 
 function Login(){
   const [loginData,setLoginData] = useState({
@@ -13,8 +15,10 @@ function Login(){
   const [emailErr,setEmailErr] = useState('')
   const [passwordErr,setPasswordErr] = useState('')
   const [success,setSuccess] = useState('')
+  const [googleUser,setGoogleUser] = useState({})
 
   const isLoggedIn = localStorage.getItem('loginData');
+  const isGmailLoggedIn = localStorage.getItem('gmailLogin');
 
   const navigate = useNavigate();
 
@@ -56,12 +60,28 @@ function Login(){
     }
   }
 
+  const handleCallback=(response)=>{
+    console.log('response',response.credential);
+    var userObject = jwtDecode(response.credential)
+    console.log(userObject);
+    setGoogleUser(userObject)
+    navigate('/dashboard');
+    localStorage.setItem('gmailLogin',JSON.stringify(userObject));
+  }
+
   useEffect(() => {
-    if(isLoggedIn){
+    if(isLoggedIn || isGmailLoggedIn){
       navigate('/dashboard');
     }
+    window.google.accounts.id.initialize({
+      client_id: '1059940744811-dqu0n7q5gu8pdr3ug38eqk1gvus6i5c6.apps.googleusercontent.com',
+      callback:handleCallback
+    })
+    window.google.accounts.id.renderButton(
+      document.getElementById("googleLogin"),{
+      theme:'outline',size:'large'
+    })
   }, []);
-
   return(
     <>
       {!isLoggedIn ? 
@@ -95,6 +115,38 @@ function Login(){
 
             {success ? <p className="success animate__animated animate__bounceInRight">{success}</p>: null}
           </form>
+
+          <div id="googleLogin"></div>
+          {/* {googleUser && <div>
+            <img src={googleUser.picture} alt="profile image" width={100} height={100}/>
+            <h2>{googleUser.given_name}{googleUser.family_name}</h2>
+            </div>
+          } */}
+
+          {/* <div id="g_id_onload"
+            data-client_id="YOUR_GOOGLE_CLIENT_ID"
+            data-login_uri="https://your.domain/your_login_endpoint"
+            data-auto_prompt="false">
+          </div> */}
+          {/* <div className="g-signin2" dataonsuccess={onSignIn}></div> */}
+
+          {/* <div id="g_id_onload"
+            data-client_id="1059940744811-dqu0n7q5gu8pdr3ug38eqk1gvus6i5c6.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-login_uri="/dashboard"
+            data-callback={()=>onSignIn()}
+            data-itp_support="true">
+        </div>
+
+        <div className="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="signin_with"
+            data-size="large"
+            data-logo_alignment="left">
+        </div> */}
         </div>
       </div>
       :null}
