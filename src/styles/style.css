@@ -109,3 +109,8 @@ ul {
 .profile-data p{
     margin: 0;
 }
+.social-buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}

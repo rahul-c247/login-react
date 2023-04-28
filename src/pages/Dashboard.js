@@ -8,6 +8,7 @@ import { useEffect,useState } from "react"
 
 function Dashboard(){
   const [emailData,setEmailData] = useState([])
+  const [facebookData,setFacebookData] = useState([])
   const navigate = useNavigate()
   const handleLogout=()=>{
     localStorage.clear()
@@ -16,6 +17,8 @@ function Dashboard(){
   useEffect(() => {
     const emailLogin = JSON.parse(localStorage.getItem('gmailLogin'));
     setEmailData(emailLogin);
+    const facebookLogin = JSON.parse(localStorage.getItem('facebookLogin'));
+    setFacebookData(facebookLogin);
   }, []);
   return(
     <>
@@ -28,6 +31,14 @@ function Dashboard(){
             <div className="profile-detail">
               <h2>{emailData && emailData.given_name}{emailData && emailData.family_name}</h2>
               <p>{emailData && emailData.email}</p>
+            </div>
+          </div>
+          :null}
+          {facebookData ?
+          <div className="profile-data">
+            <img src={facebookData && facebookData.picture} alt="profile"/>
+            <div className="profile-detail">
+              <h2>{facebookData && facebookData.name}</h2>
             </div>
           </div>
           :null}
