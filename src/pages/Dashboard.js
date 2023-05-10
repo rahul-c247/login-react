@@ -1,53 +1,17 @@
-import { useNavigate } from "react-router-dom"
 import Container from "../components/common/Container"
 import Row from "../components/common/Row"
 import Column from "../components/common/Column"
 import Button from "../components/Button"
-import ShowData from "./signup/ShowData"
-import { useEffect,useState } from "react"
+import ShowData from "../pages/signup/ShowData"
+import Header from "../components/Header"
 
 function Dashboard(){
-  const [emailData,setEmailData] = useState([])
-  const [facebookData,setFacebookData] = useState([])
-  const navigate = useNavigate()
-  const handleLogout=()=>{
-    localStorage.clear()
-    navigate('/')
-  }
-  useEffect(() => {
-    const emailLogin = JSON.parse(localStorage.getItem('gmailLogin'));
-    setEmailData(emailLogin);
-    const facebookLogin = JSON.parse(localStorage.getItem('facebookLogin'));
-    setFacebookData(facebookLogin);
-  }, []);
   return(
     <>
-      <div className="dashboard">
-        <h2>Dashboard</h2>
-        <div className="profile-right">
-          {emailData ?
-          <div className="profile-data">
-            <img src={emailData && emailData.picture} alt="profile"/>
-            <div className="profile-detail">
-              <h2>{emailData && emailData.given_name}{emailData && emailData.family_name}</h2>
-              <p>{emailData && emailData.email}</p>
-            </div>
-          </div>
-          :null}
-          {facebookData ?
-          <div className="profile-data">
-            <img src={facebookData && facebookData.picture} alt="profile"/>
-            <div className="profile-detail">
-              <h2>{facebookData && facebookData.name}</h2>
-            </div>
-          </div>
-          :null}
-          <Button className="btn" onClick={handleLogout}>Logout</Button>
-        </div>
-      </div> 
-      <Container>
-      <ShowData></ShowData>
-      </Container>
+        <Header/>
+        <Container>
+          <ShowData></ShowData>
+        </Container>
     </>
   )
 }

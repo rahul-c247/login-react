@@ -10,6 +10,7 @@ function Input(props) {
           name={props.name}
           value={props.value}
           onChange={props.onChange}
+          min={props.min}
           id={props.id}
           checked={props.checked}/>
           {props.children}

@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 function FacebookLogin(){
   const navigate = useNavigate();
-  const isFacebookLoggedIn = localStorage.getItem('facebookLogin')
+  
+  useEffect(()=>{
+    const isFacebookLoggedIn = localStorage.getItem('facebookLogin')
   window.fbAsyncInit = function() {
     window.FB.init({
       appId      : '247992354441620',
@@ -37,7 +39,6 @@ function FacebookLogin(){
       navigate('/dashboard')
     });
   }
-  useEffect(()=>{
     if(isFacebookLoggedIn){
       navigate('/dashboard')
     }

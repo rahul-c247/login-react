@@ -17,9 +17,6 @@ function ShowData(){
     setCardData(card);
 
   }, []);
-
-
-  console.log('rahul',pricingData);
   return(
     <div className="user-data">
       <Row>
