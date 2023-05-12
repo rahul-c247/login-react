@@ -9,13 +9,13 @@ function GoogleLogin(){
   const handleCallback=(response)=>{
     console.log('response',response.credential);
     var userObject = jwtDecode(response.credential)
-    navigate('/dashboard');
+    navigate('/products');
     localStorage.setItem('gmailLogin',JSON.stringify(userObject));
   }
 
   useEffect(() => {
     if(isGmailLoggedIn){
-      navigate('/dashboard');
+      navigate('/products');
     }
     window.google.accounts.id.initialize({
       client_id: '1059940744811-dqu0n7q5gu8pdr3ug38eqk1gvus6i5c6.apps.googleusercontent.com',

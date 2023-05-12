@@ -36,11 +36,11 @@ function FacebookLogin(){
     window.FB.api('/me', {fields: 'picture, name'}, function(response) {
       console.log('Facebook account connected',response);
       localStorage.setItem('facebookLogin',JSON.stringify(response))
-      navigate('/dashboard')
+      navigate('/products')
     });
   }
     if(isFacebookLoggedIn){
-      navigate('/dashboard')
+      navigate('/products')
     }
   },[])
 

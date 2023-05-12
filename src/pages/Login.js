@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import '../styles/auth.css'
 import FacebookLogin from "./socialLogin/FacebookLogin";
 import GoogleLogin from "./socialLogin/GoogleLogin";
+import { Link } from "react-router-dom";
 
 function Login(){
   const [loginData,setLoginData] = useState({
@@ -54,13 +55,13 @@ function Login(){
         password:'rahul123'
       }));
       setSuccess(Notifications.loginSuccess)
-      navigate('/dashboard');
+      navigate('/products');
     }
   }
 
   useEffect(() => {
     if(isLoggedIn){
-      navigate('/dashboard');
+      navigate('/products');
     }
   }, []);
 
@@ -93,7 +94,9 @@ function Login(){
 
             <Button type="submit" className="btn">Login</Button>
 
-            <div className="signup_link"><a href="/signup">Create new account.</a></div>
+            <div className="signup_link">
+              <Link to="/signup">Create new account.</Link>
+            </div>
 
             {success ? <p className="success animate__animated animate__bounceInRight">{success}</p>: null}
           </form>

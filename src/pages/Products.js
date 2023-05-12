@@ -6,6 +6,8 @@ import '../styles/products.css'
 import { useEffect, useRef, useState } from "react"
 import Loader from "../components/Loader"
 import Button from "../components/Button"
+/* import UseResponsive from "../utilities/useResponsive" */
+import { Link } from "react-router-dom"
 
 function Products(){
   const [products,setProducts] = useState([])
@@ -40,8 +42,8 @@ function Products(){
     }
   },[cartProducts])*/
 
-  console.log('products',products)
-  console.log('cartProducts',cartProducts);
+  /* console.log('products',products)
+  console.log('cartProducts',cartProducts); */
   return(
     <>
       {loader == true ? 
@@ -60,9 +62,9 @@ function Products(){
                 <Column col="3" key={key}>
                   <div className="products-box">
                     <div className="product-image">
-                      <a href={`/products/${item.id}`}>
+                      <Link to={`/products/${item.id}`}>
                           <img src={item.image} alt="procut-image"/>
-                      </a>
+                      </Link>
                     </div>
                     <div className="product-data">
                         <div className="category">
