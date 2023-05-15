@@ -8,7 +8,7 @@ function FacebookLogin(){
     const isFacebookLoggedIn = localStorage.getItem('facebookLogin')
   window.fbAsyncInit = function() {
     window.FB.init({
-      appId      : '247992354441620',
+      appId      : process.env.REACT_APP_FACEBOOK_APPID,
       status     : true, // check login status
       cookie     : true, // enable cookies to allow the server to access the session
       xfbml      : true  // parse XFBML
@@ -34,7 +34,7 @@ function FacebookLogin(){
 
   function testAPI() {
     window.FB.api('/me', {fields: 'picture, name'}, function(response) {
-      console.log('Facebook account connected',response);
+      /* console.log('Facebook account connected',response); */
       localStorage.setItem('facebookLogin',JSON.stringify(response))
       navigate('/products')
     });

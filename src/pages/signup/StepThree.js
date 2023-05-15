@@ -7,6 +7,7 @@ import Row from "../../components/common/Row"
 import Notifications from "../../utilities/Notifications"
 import Modal from "../../components/Modal"
 import ShowData from "./ShowData"
+import { Link } from "react-router-dom";
 
 function StepThree(props){
   const [cardDetails,setCardDetails] = useState({
@@ -163,6 +164,7 @@ function StepThree(props){
               <Button onClick={props.backStep} className="btn   black-btn">Back</Button>
               <Button type="submit" className="btn">Proceed to payment</Button>
             </div>
+            <div className="back-login"><Link to="/">Back to login</Link></div>
           </form>
         </div>
     </div>

@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import Loader from "../components/Loader"
 import Input from "../components/Input"
 import Button from "../components/Button"
+import axios from "axios"
  
 function ProductDetails(){
   const [product,setProduct] = useState()
@@ -17,25 +18,30 @@ function ProductDetails(){
 
   const navigate = useNavigate()
   const {id} = useParams()
+  const productAPI = process.env.REACT_APP_PRODUCT_API
 
   const cate = product && product.category
   useEffect(()=>{
     setLoader(true)
-    const singleProduct = async () => {
+    /* const singleProduct = async () => {
       const response = await fetch(`https://fakestoreapi.com/products/${id}`)
       const res = await response.json()
       setProduct(res)
       setLoader(false)
     }
-    singleProduct();
-    console.log('cate',cate);
+    singleProduct(); */
 
-    const relatedProducts = async () => {
-      const response = await fetch(`https://fakestoreapi.com/products`)
-      const res = await response.json()
-      setRelatedProducts(res)
-    }
-    relatedProducts();
+    axios.get(`${productAPI}/${id}`)
+    .then(function (response) {
+      setProduct(response.data)
+      setLoader(false)
+    })
+
+    axios.get(productAPI)
+    .then(function (response) {
+      setRelatedProducts(response.data)
+    })
+
   },[])
   
   const handleInput =(e)=>{

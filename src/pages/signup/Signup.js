@@ -3,6 +3,7 @@ import StepOne from "./StepOne"
 import StepThree from "./StepThree"
 import '../../styles/auth.css'
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 function Signup(){
   const [stepTwo, setStepTwo] = useState(false)

@@ -18,7 +18,7 @@ function GoogleLogin(){
       navigate('/products');
     }
     window.google.accounts.id.initialize({
-      client_id: '1059940744811-dqu0n7q5gu8pdr3ug38eqk1gvus6i5c6.apps.googleusercontent.com',
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT,
       callback:handleCallback
     })
     window.google.accounts.id.renderButton(

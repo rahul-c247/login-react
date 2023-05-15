@@ -3,6 +3,7 @@ import Button from "../../components/Button"
 import Column from "../../components/common/Column"
 import Row from "../../components/common/Row"
 import Pricing from "../../components/Pricing"
+import { Link } from "react-router-dom"
 
 function StepTwo(props){
   const [plans,setPlans] = useState()
@@ -62,6 +63,7 @@ function StepTwo(props){
         <Button type="button" onClick={props.backStep} className="btn black-btn">Back</Button>
         {isPlanSelected ? <Button type="button" className="btn" onClick={goToThirdStep}>Next step</Button>:null}
       </div>
+      <div className="back-login"><Link to="/">Back to login</Link></div>
     </div>
   )
 }

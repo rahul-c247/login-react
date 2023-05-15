@@ -5,6 +5,7 @@ import Button from "../../components/Button"
 import Notifications from "../../utilities/Notifications";
 import Validators from "../../utilities/Validators"
 import { useState } from "react"
+import { Link } from "react-router-dom";
 
 function StepOne(props){
   const [signupData, setSignupData] = useState({
@@ -177,6 +178,7 @@ function StepOne(props){
                 </Input>
 
                 <Button type="submit" className="btn">Next Step</Button>
+                <div className="back-login"><Link to="/">Back to login</Link></div>
             </Column>
           </Row>
         </form>

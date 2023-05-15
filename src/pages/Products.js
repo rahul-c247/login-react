@@ -8,6 +8,8 @@ import Loader from "../components/Loader"
 import Button from "../components/Button"
 import { Link } from "react-router-dom"
 import Responsive from "../utilities/Responsive"
+import axios from 'axios';
+
 
 function Products(){
   const [products,setProducts] = useState([])
@@ -16,17 +18,26 @@ function Products(){
   /* const [addedCart,setAddedCart] = useState(false) */
   //const prevData = useRef()
 
+  const productAPI = process.env.REACT_APP_PRODUCT_API
   const {isDesktop,isLaptop,isMiniLaptop,isMobile,isTablet} = Responsive()
   
   useEffect(()=>{
     setLoader(true)
-    const loadProducts = async () => {
+    /* const loadProducts = async () => {
       const response = await fetch('https://fakestoreapi.com/products')
       const res = await response.json()
       setProducts(res)
       setLoader(false)
     }
-    loadProducts();
+    loadProducts(); */
+
+    axios.get(productAPI)
+    .then(function (response) {
+      setProducts(response.data)
+      setLoader(false)
+    })
+
+    
   },[])
 
   const addToCart =(id)=>{
