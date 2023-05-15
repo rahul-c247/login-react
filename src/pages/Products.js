@@ -17,8 +17,7 @@ function Products(){
   const [cartProducts,setCartProducts] = useState([])
   /* const [addedCart,setAddedCart] = useState(false) */
   //const prevData = useRef()
-
-  const productAPI = process.env.REACT_APP_PRODUCT_API
+  
   const {isDesktop,isLaptop,isMiniLaptop,isMobile,isTablet} = Responsive()
   
   useEffect(()=>{
@@ -31,7 +30,7 @@ function Products(){
     }
     loadProducts(); */
 
-    axios.get(productAPI)
+    axios.get(`${process.env.REACT_APP_PRODUCT_API}/products`)
     .then(function (response) {
       setProducts(response.data)
       setLoader(false)

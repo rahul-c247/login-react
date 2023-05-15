@@ -18,7 +18,6 @@ function ProductDetails(){
 
   const navigate = useNavigate()
   const {id} = useParams()
-  const productAPI = process.env.REACT_APP_PRODUCT_API
 
   const cate = product && product.category
   useEffect(()=>{
@@ -31,13 +30,13 @@ function ProductDetails(){
     }
     singleProduct(); */
 
-    axios.get(`${productAPI}/${id}`)
+    axios.get(`${process.env.REACT_APP_PRODUCT_API}/products/${id}`)
     .then(function (response) {
       setProduct(response.data)
       setLoader(false)
     })
 
-    axios.get(productAPI)
+    axios.get(`${process.env.REACT_APP_PRODUCT_API}/products`)
     .then(function (response) {
       setRelatedProducts(response.data)
     })
