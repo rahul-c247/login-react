@@ -6,8 +6,8 @@ import '../styles/products.css'
 import { useEffect, useRef, useState } from "react"
 import Loader from "../components/Loader"
 import Button from "../components/Button"
-/* import UseResponsive from "../utilities/useResponsive" */
 import { Link } from "react-router-dom"
+import Responsive from "../utilities/Responsive"
 
 function Products(){
   const [products,setProducts] = useState([])
@@ -16,6 +16,8 @@ function Products(){
   /* const [addedCart,setAddedCart] = useState(false) */
   //const prevData = useRef()
 
+  const {isDesktop,isLaptop,isMiniLaptop,isMobile,isTablet} = Responsive()
+  
   useEffect(()=>{
     setLoader(true)
     const loadProducts = async () => {
@@ -59,7 +61,11 @@ function Products(){
             <Row>
               {products.map((item,key)=>{
                 return(
-                <Column col="3" key={key}>
+                <Column col={
+                    isLaptop ? '3' :
+                    isMiniLaptop ? '4' :
+                    isTablet ? '6' : '12'
+                } key={key}>
                   <div className="products-box">
                     <div className="product-image">
                       <Link to={`/products/${item.id}`}>
